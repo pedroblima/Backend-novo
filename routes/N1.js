@@ -20,15 +20,15 @@ router.post('/ex1', function (req, res) {
 })
 
 router.post('/ex2', function (req, res) {
-    const totaldeeleitores = Number(req.body.totaldeeleitores)
-    const votosbrancos = Number(req.body.votosbrancos)
-    const votosnulos = Number(req.body.votosnulos)
-    const votosvalidos = Number(req.body.votosvalidos)
+    const eleitores = Number(req.body.eleitores)
+    const brancos = Number(req.body.brancos)
+    const nulos = Number(req.body.nulos)
+    const validos = Number(req.body.validos)
 
-    const soma = votosbrancos + votosnulos + votosvalidos
+    const soma = brancos + nulos + validos
 
     let retorno = {}
-    if (soma > totaldeeleitores) {
+    if (soma > eleitores) {
 
         retorno = {
             codigo: 'soma_de_eleitores',
@@ -38,9 +38,9 @@ router.post('/ex2', function (req, res) {
         res.status(200).json(retorno)
 
     } else {
-        const percentualbrancos = votosbrancos / totaldeeleitores * 100
-        const percentualvalidos = votosvalidos / totaldeeleitores * 100
-        const percentualnulos = votosnulos / totaldeeleitores * 100
+        const percentualbrancos = brancos / eleitores * 100
+        const percentualvalidos = validos / eleitores * 100
+        const percentualnulos = nulos / eleitores * 100
 
 
         retorno = { percentualbrancos, percentualnulos, percentualvalidos }
@@ -50,14 +50,14 @@ router.post('/ex2', function (req, res) {
 
 })
 router.post('/ex3', function (req, res) {
-        const salarioaatual = Number(req.body.salario);
+        const salario = Number(req.body.salario);
 
-        const reeajuste = 0.07;
+        const reajuste = 0.07;
 
-        const salarioreajustado = salarioaatual * (1 + reeajuste);
+        const novosalario = salario * (1 + reajuste);
 
         retorno = {
-            codigo: salarioreajustado,
+            codigo: novosalario,
             mensagem: "Novo salario"
         }
 
@@ -66,36 +66,36 @@ router.post('/ex3', function (req, res) {
 
 router.post('/ex4', function (req, res) {
 
-        const custodefabrica = Number(req.body.custodefabrica)
-        const procentualdedistribuidor = custodefabrica * 28 / 100
-        const porcentualdeimpostos = custodefabrica * 45 / 100
-        const custofinalaoconsumidor = custodefabrica + procentualdedistribuidor + porcentualdeimpostos
+        const custo = Number(req.body.custo)
+        const distribuidor = custo * 28 / 100
+        const impostos = custo * 45 / 100
+        const custofinal = custo + distribuidor + impostos
 
         const resposta = {
-            custofinalaoconsumidor: custofinalaoconsumidor
+            custofinal: custofinal
         }
 
         res.json(resposta)
 })
 
-router.post('/ex5', function (req, res) {
+router.post('/ex5', function(req, res){
+
+    const {custoFabrica, percentualDistribuidor, percentualImposto} = req.body
+    const custoDistribuidor =  custoFabrica * Number(percentualDistribuidor/100)
+    const custoImposto = custoFabrica * (Number(percentualImposto) /100)
+    const custoFinal = custoFabrica + custoDistribuidor + custoImposto
+
+    const resposta = {
+        custoFinal: custoFinal}
         
-        const { custodefabrica, impostosdistribuidorfabricacao, impostos } = req.body
-        const custoDistribuidor = custodefabrica * Number(impostosdistribuidorfabricacao / 100)
-        const custoImposto = custodefabrica * (Number(impostos) / 100)
-        const custofinal = custodefabrica + impostosdistribuidorfabricacao + impostos
+    res.json(resposta) 
 
-        const resposta = {
-            custoFinal: custofinal      
-        }
-
-        res.json(resposta)
 })
 router.post('/ex6', function(req, res){
 
-    const { numerodevendas, valorPorCarro, vazlortotalvendas, salariofixo} = req.body
-    const pagamentoPorCarro = Number( numerodevendas) * Number(valorPorCarro)
-    const pagamentoPorVenda = (Number(vazlortotalvendas) * 5 /100)
+    const { vendas, valorPorCarro, totalvendas, salariofixo} = req.body
+    const pagamentoPorCarro = Number( vendas) * Number(valorPorCarro)
+    const pagamentoPorVenda = (Number(totalvendas) * 5 /100)
     const salarioFinal = Number(salariofixo) + pagamentoPorCarro + pagamentoPorVenda
 
     const resposta = {
