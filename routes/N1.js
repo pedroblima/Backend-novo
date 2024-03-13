@@ -48,8 +48,8 @@ router.post('/ex2', function (req, res) {
         res.status(200).json(retorno)
     }
 
-
-    router.post('/ex3', function (req, res) {
+})
+router.post('/ex3', function (req, res) {
         const salarioaatual = Number(req.body.salario);
 
         const reeajuste = 0.07;
@@ -61,10 +61,10 @@ router.post('/ex2', function (req, res) {
             mensagem: "Novo salario"
         }
 
-        res.status(200).json(retorno)
-    })
+    res.status(200).json(retorno)
+})
 
-    router.post('/ex4', function (req, res) {
+router.post('/ex4', function (req, res) {
 
         const custodefabrica = Number(req.body.custodefabrica)
         const procentualdedistribuidor = custodefabrica * 28 / 100
@@ -76,9 +76,9 @@ router.post('/ex2', function (req, res) {
         }
 
         res.json(resposta)
-    })
+})
 
-    router.post('/ex5', function (req, res) {
+router.post('/ex5', function (req, res) {
         
         const { custodefabrica, impostosdistribuidorfabricacao, impostos } = req.body
         const custoDistribuidor = custodefabrica * Number(impostosdistribuidorfabricacao / 100)
@@ -90,7 +90,7 @@ router.post('/ex2', function (req, res) {
         }
 
         res.json(resposta)
-    })
+})
 router.post('/ex6', function(req, res){
 
     const { numerodevendas, valorPorCarro, vazlortotalvendas, salariofixo} = req.body
@@ -144,5 +144,5 @@ router.post('/ex9', function(req, res){
     
 })
 
-})
+
 module.exports = router
