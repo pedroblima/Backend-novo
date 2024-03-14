@@ -59,7 +59,7 @@ router.post('/ex3', function(req, res){
 router.post('/ex4', function(req, res){
     const { salarioMinimo, horasTrabalhadas, dependentes, horasExtras } = req.body;
 
-    const valorHoraTrabalhada = salarioMinimo / 5;
+    const valorHoraTrabalhada = salarioMinimo * 0.2;
 
     const salarioMes = horasTrabalhadas * valorHoraTrabalhada;
 
@@ -76,7 +76,7 @@ router.post('/ex4', function(req, res){
     } else if (salarioBruto <= 5000) {
         irrf = salarioBruto * 0.1;
     } else {
-        irrf = salarioBruto * 0.2;
+        irrf = salarioBruto * 0.2; 
     }
 
     const salarioLiquido = salarioBruto - irrf;
