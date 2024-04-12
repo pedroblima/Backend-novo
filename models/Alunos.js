@@ -19,6 +19,10 @@ const alunoSchema = new mongoose.Schema({
             message: props => `${props.value} não é uma nota válida!`
         },
         required: true
+    },
+    media: {
+        type: Number,
+        required: false 
     }
 });
 
